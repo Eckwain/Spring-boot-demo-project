@@ -1,19 +1,41 @@
 package com.example.demo.model;
 
-public class Post {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@Entity
+public class Post implements Serializable {
+    @Id
+    @GeneratedValue
+    private Long id; // Новое поле
     private String text;
     private Integer likes;
+    private Date creationDate;
 
-    public Post (String txt, int lks){
-        text = txt;
-        likes = lks;
+    // Обновленный конструктор
+    public Post(Long id, String text, Date creationDate) {
+        this.id = id;
+        this.text = text;
+        this.creationDate = creationDate;
+        this.likes = 0;
+    }
+    public Post(){
+
     }
 
-    public String getText(){
-        return text;
-    }
+    public Long getId() { return id; }
 
-    public Integer getLikes(){
-        return likes;
+    public String getText() { return text; }
+
+    public Integer getLikes() { return likes; }
+
+    public Date getCreationDate() { return creationDate; }
+
+    public void setLikes(Integer likes) { // Сеттер нужен для изменения лайков
+        this.likes = likes;
     }
 }
